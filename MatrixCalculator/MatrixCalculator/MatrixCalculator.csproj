@@ -45,6 +45,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BinaryOpsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BinaryOpsWindow.Designer.cs">
+      <DependentUpon>BinaryOpsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinearSystemOpsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LinearSystemOpsWindow.Designer.cs">
+      <DependentUpon>LinearSystemOpsWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +71,25 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnaryOpsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnaryOpsWindow.Designer.cs">
+      <DependentUpon>UnaryOpsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util.cs" />
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BinaryOpsWindow.resx">
+      <DependentUpon>BinaryOpsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LinearSystemOpsWindow.resx">
+      <DependentUpon>LinearSystemOpsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuForm.resx">
+      <DependentUpon>MenuForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,6 +99,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UnaryOpsWindow.resx">
+      <DependentUpon>UnaryOpsWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

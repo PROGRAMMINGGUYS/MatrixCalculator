@@ -14,9 +14,15 @@ namespace MatrixCalculator
         [STAThread]
         static void Main()
         {
+            if (Environment.OSVersion.Version.Major >= 6) // for scaling adjustment
+                SetProcessDPIAware();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MenuForm());
         }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")] // for scaling adjustment
+        private static extern bool SetProcessDPIAware();
     }
 }

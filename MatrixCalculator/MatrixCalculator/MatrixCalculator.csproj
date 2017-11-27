@@ -57,12 +57,16 @@
     <Compile Include="BinaryOpsWindow.Designer.cs">
       <DependentUpon>BinaryOpsWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data structures\LinearSystem.cs" />
     <Compile Include="LinearSystemOpsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LinearSystemOpsWindow.Designer.cs">
       <DependentUpon>LinearSystemOpsWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data structures\Matrix.cs" />
+    <Compile Include="LogHandler.cs" />
+    <Compile Include="Math ops\GaussianEliminationAlg.cs" />
     <Compile Include="MenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,5 +119,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

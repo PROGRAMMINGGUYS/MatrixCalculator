@@ -63,6 +63,8 @@
             this.clearAllButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.importButton = new System.Windows.Forms.Button();
+            this.systemOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.systemSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.masterTableLayoutPanel.SuspendLayout();
             this.logGroupBox.SuspendLayout();
             this.setupTableLayoutPanel.SuspendLayout();
@@ -208,7 +210,7 @@
             this.algorithmComboBox.FormattingEnabled = true;
             this.algorithmComboBox.Items.AddRange(new object[] {
             "Gaussian elimination"});
-            this.algorithmComboBox.Location = new System.Drawing.Point(88, 31);
+            this.algorithmComboBox.Location = new System.Drawing.Point(88, 29);
             this.algorithmComboBox.Name = "algorithmComboBox";
             this.algorithmComboBox.Size = new System.Drawing.Size(722, 28);
             this.algorithmComboBox.TabIndex = 2;
@@ -597,6 +599,17 @@
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
+            // systemOpenFileDialog
+            // 
+            this.systemOpenFileDialog.DefaultExt = "mcs";
+            this.systemOpenFileDialog.Filter = "System file|*.mcs|All files|*.*";
+            // 
+            // systemSaveFileDialog
+            // 
+            this.systemSaveFileDialog.DefaultExt = "mcs";
+            this.systemSaveFileDialog.FileName = "NewSystem";
+            this.systemSaveFileDialog.Filter = "System file|*.mcs|All files|*.*";
+            // 
             // LinearSystemOpsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -672,5 +685,7 @@
         private System.Windows.Forms.Button copySystemButton;
         private System.Windows.Forms.Button clearSystemButton;
         private System.Windows.Forms.DataGridView systemMatrixDataGridView;
+        private System.Windows.Forms.OpenFileDialog systemOpenFileDialog;
+        private System.Windows.Forms.SaveFileDialog systemSaveFileDialog;
     }
 }

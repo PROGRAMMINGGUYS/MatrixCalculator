@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MatrixCalculator.DataStructures;
 using MatrixCalculator.MathOps;
+using System.IO;
 
 namespace MatrixCalculator
 {
@@ -111,6 +112,49 @@ namespace MatrixCalculator
         }
 
         /// <summary>
+        /// Parses the system string and inserts it into the DataGridViews
+        /// </summary>
+        /// <param name="systemString"></param>
+        private void InitializeSystemFromString(string systemString)
+        {
+            string[] systemRows = systemString.Split('\n');
+
+            // if dimensions don't match
+            if (systemRows.Length != systemMatrixDataGridView.RowCount)
+            {
+                Util.ErrorBox("System dimension doesn't match");
+                return;
+            }
+
+            // parse and insert into the DataGridViews
+            for (int i = 0; i < systemRows.Length; i++)
+            {
+                string[] row = systemRows[i].Split(' ');
+                for (int j = 0; j < row.Length - 1; j++)
+                {
+                    systemMatrixDataGridView.Rows[i].Cells[j].Value = row[j];
+                }
+                constVectorDataGridView.Rows[i].Cells[0].Value = row[row.Length - 1];
+            }
+        }
+
+        /// <summary>
+        /// Saves the system into the specified location
+        /// </summary>
+        /// <param name="path"></param>
+        private void SaveSystem(string path)
+        {
+            try
+            {
+                File.WriteAllText(path, (new LinearSystem(systemMatrixDataGridView, constVectorDataGridView)).ToString());
+            }
+            catch (Exception ex)
+            {
+                Util.ErrorBox(string.Format("Failed to save the system\n\n{0}", ex.Message));
+            }
+        }
+
+        /// <summary>
         /// Sets the grid for matrices and vectors of the system
         /// </summary>
         /// <param name="sender"></param>
@@ -160,6 +204,7 @@ namespace MatrixCalculator
             }
         }
 
+        
         #region DataGridView buttons
 
         private void copySystemButton_Click(object sender, EventArgs e)
@@ -174,16 +219,7 @@ namespace MatrixCalculator
             // pastes the system if it's of a valid size, spliting it into elements
             try
             {
-                string[] systemRows = pastedSystem.Split('\n');
-                for (int i = 0; i < systemRows.Length; i++)
-                {
-                    string[] row = systemRows[i].Split(' ');
-                    for (int j = 0; j < row.Length - 1; j++)
-                    {
-                        systemMatrixDataGridView.Rows[i].Cells[j].Value = row[j];
-                    }
-                    constVectorDataGridView.Rows[i].Cells[0].Value = row[row.Length - 1];
-                }
+                InitializeSystemFromString(pastedSystem);
             }
             catch (Exception)
             {
@@ -218,17 +254,45 @@ namespace MatrixCalculator
 
         private void importButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                systemOpenFileDialog.FileName = string.Empty;
+                DialogResult openFileDialogResult = systemOpenFileDialog.ShowDialog();              
 
+                if (openFileDialogResult == DialogResult.OK)
+                {
+                    InitializeSystemFromString(File.ReadAllText(systemOpenFileDialog.FileName));
+                }
+            }
+            catch (Exception)
+            {
+                ClearSystem();
+                Util.ErrorBox("Failed to import the system");
+            }
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            DialogResult saveFileDialogResult = systemSaveFileDialog.ShowDialog();
 
+            if (saveFileDialogResult == DialogResult.OK)
+            {
+                SaveSystem(systemSaveFileDialog.FileName);
+            }
         }
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
+            ClearSystem();
 
+            systemMatrixDataGridView.RowCount = 0;
+            systemMatrixDataGridView.ColumnCount = 0;
+
+            constVectorDataGridView.RowCount = 0;
+            constVectorDataGridView.ColumnCount = 0;
+
+            solutionDataGridView.RowCount = 0;
+            solutionDataGridView.ColumnCount = 0;
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -237,9 +301,14 @@ namespace MatrixCalculator
             {
                 DialogResult confirmation = Util.ConfirmationBox("Closing the form may result in a loss of data.\nWould you like to save the system?");
 
-                if (confirmation == DialogResult.Yes)
+                if (confirmation == DialogResult.Yes) // save system option
                 {
+                    DialogResult saveFileDialogResult = systemSaveFileDialog.ShowDialog();
 
+                    if (saveFileDialogResult == DialogResult.OK)
+                    {
+                        SaveSystem(systemSaveFileDialog.FileName);
+                    }
                 }
                 else if (confirmation == DialogResult.No)
                 {
@@ -250,15 +319,20 @@ namespace MatrixCalculator
 
         #endregion
 
+
         private void LinearSystemOpsWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (solutionDataGridView.RowCount > 0) // if the system has been initialized
             {
                 DialogResult confirmation = Util.ConfirmationBox("Closing the form may result in a loss of data.\nWould you like to save the system?");
-
-                if (confirmation == DialogResult.Yes)
+                if (confirmation == DialogResult.Yes) // save system option
                 {
-                    #warning TODO
+                    DialogResult saveFileDialogResult = systemSaveFileDialog.ShowDialog();
+
+                    if (saveFileDialogResult == DialogResult.OK)
+                    {
+                        SaveSystem(systemSaveFileDialog.FileName);
+                    }
                 }
                 else if (confirmation == DialogResult.Cancel)
                 {

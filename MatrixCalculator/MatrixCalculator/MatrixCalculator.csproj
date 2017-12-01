@@ -67,6 +67,7 @@
     <Compile Include="Data structures\Matrix.cs" />
     <Compile Include="LogHandler.cs" />
     <Compile Include="Math ops\GaussianEliminationAlg.cs" />
+    <Compile Include="Math ops\LUDecompAlg.cs" />
     <Compile Include="MenuForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -197,6 +197,9 @@ namespace MatrixCalculator
                     case 0: // Gaussian elimination
                         solution = GaussianEliminationAlg.SolveSystem(logHandl, sys);
                         break;
+                    case 1: // LU decomposition
+                        solution = LUDecompAlg.SolveSystem(logHandl, sys);
+                        break;
                     default:
                         break;
                 }

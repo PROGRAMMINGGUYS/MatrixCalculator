@@ -105,10 +105,11 @@ namespace MatrixCalculator.MathOps
             int dim = decompose.L.RowNum;
             double[] ySolution = new double[dim];
 
-            for (int i = 0; i < dim; i++)
-            {
-                if (decompose.L[i, i] != 1) { return null; } // invalid lower matrix
-            }
+            // invalid since this function is also used for other decompositions
+            //for (int i = 0; i < dim; i++)
+            //{
+            //    if (decompose.L[i, i] != 1) { return null; } // invalid lower matrix
+            //}
 
             // Ly = b solving
             ySolution[0] = constVect[0];

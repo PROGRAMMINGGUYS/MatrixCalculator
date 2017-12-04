@@ -318,6 +318,7 @@ namespace MatrixCalculator
                     Close();
                 }
             }
+            else { Close(); }
         }
 
         #endregion

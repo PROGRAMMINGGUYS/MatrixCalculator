@@ -81,12 +81,12 @@ namespace MatrixCalculator
         /// <param name="matrix"></param>
         public void LogVector(double[] vector)
         {
-            LogTBox.AppendText("\r\n[ ");
+            LogTBox.AppendText("[ ");
             foreach (double val in vector)
             {
                 LogTBox.AppendText(string.Format("{0} ", val.ToString()));
             }
-            LogTBox.AppendText("]\r\n");
+            LogTBox.AppendText("]\r\n\r\n");
         }
 
         /// <summary>

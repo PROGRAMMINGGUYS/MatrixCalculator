@@ -360,6 +360,15 @@ namespace MatrixCalculator.DataStructures
             return true;
         }
 
+        /// <summary>
+        /// Checks whether the matrix is square (if # of rows matches the # of columns)
+        /// </summary>
+        /// <returns></returns>
+        public bool IsSquare()
+        {
+            return (rowNum == colNum);
+        }
+
         #endregion
 
         #region Matrix operations
@@ -413,8 +422,8 @@ namespace MatrixCalculator.DataStructures
             {
                 for (int j = 0; j < colNum; j++)
                 {
-                    // avoid appending the space to the last row because it affects the Split function
-                    res += (i == colNum - 1) ? string.Format("{0}", elements[i][j]) : string.Format("{0} ", elements[i][j]);
+                    // avoid appending the space to the last element because it affects the Split function
+                    res += (j == colNum - 1) ? string.Format("{0}", elements[i][j]) : string.Format("{0} ", elements[i][j]);
                 }
                 // avoid appending \n to the last row because it affects the Split function
                 if (i != rowNum - 1) { res += "\n"; }
